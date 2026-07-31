@@ -14,7 +14,9 @@ datasource db {
 
 model Player {
   id Int @id @default(autoincrement())
-
+  nom     String
+  prenom  String
+  age     Int
   positionId Int
   position   Position @relation(fields: [positionId], references: [id])
 
@@ -24,12 +26,13 @@ model Player {
 
 model Position {
   id Int @id @default(autoincrement())
-
+  nom String
   players Player[]
 }
 
 model Team {
   id Int @id @default(autoincrement())
+  nom String
 
   players Player[]
 }
