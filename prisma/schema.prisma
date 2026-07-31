@@ -11,3 +11,25 @@ generator client {
 datasource db {
   provider = "mysql"
 }
+
+model Player {
+  id Int @id @default(autoincrement())
+
+  positionId Int
+  position   Position @relation(fields: [positionId], references: [id])
+
+  teamId Int
+  team   Team @relation(fields: [teamId], references: [id])
+}
+
+model Position {
+  id Int @id @default(autoincrement())
+
+  players Player[]
+}
+
+model Team {
+  id Int @id @default(autoincrement())
+
+  players Player[]
+}

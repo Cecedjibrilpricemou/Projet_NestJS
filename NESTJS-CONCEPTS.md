@@ -86,6 +86,14 @@ Installé mais pas encore utilisé dans le code : le schéma ne contient pas enc
 
 Base de données configurée : MySQL, base `football` (créée via XAMPP), connexion définie dans `.env` (`DATABASE_URL`, non commité).
 
+### Modèles définis
+
+- `Player` : appartient à une seule `Position` et une seule `Team` (relations `many-to-one` via `positionId`/`teamId`).
+- `Position` : peut avoir plusieurs `Player` (`one-to-many`).
+- `Team` : peut avoir plusieurs `Player` (`one-to-many`).
+
+Pour l'instant, seuls les champs `id` et les champs de relation sont définis ; les champs métier (nom, numéro, etc.) seront ajoutés ensuite.
+
 ## Autres concepts NestJS courants (pas encore utilisés dans ce projet)
 
 - **DTO (Data Transfer Object)** : classe décrivant la forme des données reçues/envoyées, souvent couplée à la validation (`class-validator`).
