@@ -84,6 +84,8 @@ Prisma est un ORM qui permet de définir le schéma de la base de données et de
 
 Installé mais pas encore utilisé dans le code : le schéma ne contient pas encore de modèle, et aucun `PrismaModule`/`PrismaService` n'a été créé pour l'instant.
 
+Base de données configurée : MySQL, base `football` (créée via XAMPP), connexion définie dans `.env` (`DATABASE_URL`, non commité).
+
 ## Autres concepts NestJS courants (pas encore utilisés dans ce projet)
 
 - **DTO (Data Transfer Object)** : classe décrivant la forme des données reçues/envoyées, souvent couplée à la validation (`class-validator`).
