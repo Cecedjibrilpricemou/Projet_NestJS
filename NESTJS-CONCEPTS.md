@@ -92,7 +92,12 @@ Base de données configurée : MySQL, base `football` (créée via XAMPP), conne
 - `Position` : peut avoir plusieurs `Player` (`one-to-many`).
 - `Team` : peut avoir plusieurs `Player` (`one-to-many`).
 
-Pour l'instant, seuls les champs `id` et les champs de relation sont définis ; les champs métier (nom, numéro, etc.) seront ajoutés ensuite.
+Champs métier ajoutés : `nom`/`prenom`/`age` sur `Player`, `nom` sur `Position` et `Team`.
+
+### Migration et connectivité
+
+- `npx prisma migrate dev --name init` : a testé la connexion à la base MySQL `football_db` et créé les tables correspondant aux modèles (migration stockée dans `prisma/migrations/`).
+- `npx prisma studio` : interface web (http://localhost:5555 par défaut) pour visualiser/éditer les données de la base directement depuis le navigateur.
 
 ## Autres concepts NestJS courants (pas encore utilisés dans ce projet)
 
