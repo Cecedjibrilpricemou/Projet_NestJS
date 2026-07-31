@@ -72,6 +72,18 @@ bootstrap();
 Requête HTTP → Controller (route) → Service (logique métier) → Réponse
 ```
 
+## Prisma (ORM)
+
+Prisma est un ORM qui permet de définir le schéma de la base de données et de générer un client TypeScript typé pour interroger cette base, sans écrire de SQL à la main.
+
+- `prisma/schema.prisma` : décrit la connexion à la base (`datasource`) et les modèles de données (tables).
+- `@prisma/client` : le client généré à partir du schéma, utilisé dans le code (généralement via un `PrismaService` injectable) pour faire les requêtes (`findMany`, `create`, `update`...).
+- `DATABASE_URL` (dans `.env`) : l'URL de connexion à la base, jamais commitée sur Git.
+- `npx prisma migrate dev` : applique les changements du schéma à la base et génère une migration.
+- `npx prisma generate` : régénère le client Prisma après une modification du schéma.
+
+Installé mais pas encore utilisé dans le code : le schéma ne contient pas encore de modèle, et aucun `PrismaModule`/`PrismaService` n'a été créé pour l'instant.
+
 ## Autres concepts NestJS courants (pas encore utilisés dans ce projet)
 
 - **DTO (Data Transfer Object)** : classe décrivant la forme des données reçues/envoyées, souvent couplée à la validation (`class-validator`).
