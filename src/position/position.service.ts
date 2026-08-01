@@ -31,4 +31,35 @@ export class PositionService {
       data: { nom },
     });
   }
+
+  // remplace le nom d'une position existante (mise à jour complète, type PUT)
+  async updatePosition(id: number, nom: string) {
+    // vérifie que la position existe, sinon lève une 404
+    await this.getOnePosition(id);
+
+    return this.prisma.position.update({
+      where: { id },
+      data: { nom },
+    });
+  }
+
+  // met à jour partiellement une position (type PATCH, uniquement les champs fournis)
+  async patchPosition(id: number, data: Partial<{ nom: string }>) {
+    await this.getOnePosition(id);
+
+    return this.prisma.position.update({
+      where: { id },
+      data,
+    });
+  }
+
+  // supprime une position à partir de son id
+  async deletePosition(id: number) {
+    // vérifie que la position existe, sinon lève une 404
+    await this.getOnePosition(id);
+
+    return this.prisma.position.delete({
+      where: { id },
+    });
+  }
 }
