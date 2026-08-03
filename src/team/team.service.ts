@@ -26,24 +26,24 @@ export class TeamService {
   }
 
   // crée une nouvelle équipe à partir de son nom
-  async createTeam(nom: string) {
+  async createTeam(nom: string, countryId: number) {
     return this.prisma.team.create({
-      data: { nom },
+      data: { nom, countryId },
     });
   }
 
   // remplace le nom d'une équipe existante (mise à jour complète, type PUT)
-  async updateTeam(id: number, nom: string) {
+  async updateTeam(id: number, nom: string, countryId: number) {
     await this.getOneTeam(id);
 
     return this.prisma.team.update({
       where: { id },
-      data: { nom },
+      data: { nom, countryId },
     });
   }
 
   // met à jour partiellement une équipe (type PATCH, uniquement les champs fournis)
-  async patchTeam(id: number, data: Partial<{ nom: string }>) {
+  async patchTeam(id: number, data: Partial<{ nom: string; countryId: number }>) {
     await this.getOneTeam(id);
 
     return this.prisma.team.update({

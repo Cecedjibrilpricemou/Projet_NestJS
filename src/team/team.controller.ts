@@ -30,21 +30,25 @@ export class TeamController {
 
   // POST /team -> crée une nouvelle équipe
   @Post()
-  createTeam(@Body('nom') nom: string) {
-    return this.teamService.createTeam(nom);
+  createTeam(@Body('nom') nom: string, @Body('countryId', ParseIntPipe) countryId: number) {
+    return this.teamService.createTeam(nom, countryId);
   }
 
   // PUT /team/:id -> remplace complètement une équipe
   @Put(':id')
-  updateTeam(@Param('id', ParseIntPipe) id: number, @Body('nom') nom: string) {
-    return this.teamService.updateTeam(id, nom);
+  updateTeam(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('nom') nom: string,
+    @Body('countryId', ParseIntPipe) countryId: number,
+  ) {
+    return this.teamService.updateTeam(id, nom, countryId);
   }
 
   // PATCH /team/:id -> met à jour partiellement une équipe
   @Patch(':id')
   patchTeam(
     @Param('id', ParseIntPipe) id: number,
-    @Body() data: Partial<{ nom: string }>,
+    @Body() data: Partial<{ nom: string; countryId: number }>,
   ) {
     return this.teamService.patchTeam(id, data);
   }

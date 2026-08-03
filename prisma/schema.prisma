@@ -23,6 +23,8 @@ model Player {
 
   teamId Int
   team   Team @relation(fields: [teamId], references: [id])
+
+  transfers Transfer[]
 }
 
 model Position {
@@ -31,9 +33,39 @@ model Position {
   players Player[]
 }
 
+model Country {
+  id Int @id @default(autoincrement())
+  nom String
+
+  teams Team[]
+}
+
 model Team {
   id Int @id @default(autoincrement())
   nom String
 
+  countryId Int
+  country   Country @relation(fields: [countryId], references: [id])
+
   players Player[]
+
+  transfersFrom Transfer[] @relation("TransferFromTeam")
+  transfersTo   Transfer[] @relation("TransferToTeam")
+}
+
+// historique des transferts de joueurs entre équipes
+model Transfer {
+  id Int @id @default(autoincrement())
+
+  playerId Int
+  player   Player @relation(fields: [playerId], references: [id])
+
+  fromTeamId Int
+  fromTeam   Team @relation("TransferFromTeam", fields: [fromTeamId], references: [id])
+
+  toTeamId Int
+  toTeam   Team @relation("TransferToTeam", fields: [toTeamId], references: [id])
+
+  montant Float
+  date    DateTime @default(now())
 }
